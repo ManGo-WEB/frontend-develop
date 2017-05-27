@@ -127,7 +127,18 @@ gulp.task('watch', function(){
     });
 });
 
+//LiveReload Task
+gulp.task('webserver', function() {
+	browserSync(config);
+});
 
+//Clean Task
+gulp.task('clean', function(cb) {
+	rimraf(path.clean, cb);
+});
+
+//Default Task
+gulp.task('default', ['build', 'webserver', 'watch']);
 
 
 
