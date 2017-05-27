@@ -39,14 +39,14 @@ var path = {
 	clean: './build'
 };
 
-var config = { //Настройка переменных сервера
-	server: {
-		baseDir: "./build"
-	},
-	tunnel: true,
-	host: 'localhost',
-	pory: 9000,
-	logPrefix: "FrontEnd_Develop"
+var config = {
+    server: {
+        baseDir: "./build"
+    },
+    //tunnel: true,
+    host: 'localhost',
+    port: 9000,
+    //logPrefix: "Frontend_Develop"
 };
 
 // Task сборка HTML
@@ -128,8 +128,8 @@ gulp.task('watch', function(){
 });
 
 //LiveReload Task
-gulp.task('webserver', function() {
-	browserSync(config);
+gulp.task('webserver', function () {
+    browserSync(config);
 });
 
 //Clean Task
