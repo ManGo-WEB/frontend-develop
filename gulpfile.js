@@ -16,11 +16,11 @@ var gulp = require('gulp'),
 
 var path = {
 	build: { //Куда складывать готовые файлы после сборки
-		html: 'build',
-		js: 'build/js',
-		css: 'build/css',
-		img: 'build/img',
-		fonts: 'build/fonts'
+		html: 'build/',
+		js: 'build/js/',
+		css: 'build/css/',
+		img: 'build/img/',
+		fonts: 'build/fonts/'
 	},
 	src: { //Откуда брать исходники
 		html: 'src/*.html', //Хотим взять все файлы с расширением .html
@@ -37,7 +37,42 @@ var path = {
 		fonts: 'src/fonts/**/*.*'
 	},
 	clean: './build'
-}
+};
+
+var config = { //Настройка переменных сервера
+	server: {
+		baseDir: "./build"
+	},
+	tunnel: true,
+	host: 'localhost',
+	pory: 9000,
+	logPrefix: "FrontEnd_Develop"
+};
+
+// Task сборка HTML
+gulp.task('html:build', function () { // Таск для сборки HTML
+	gulp.src(path.src.html) // Выбока файлов по нужному пути
+		.pipe(rigger()) // Прогон через rigger
+		.pipe(gulp.dest(path.build.html)) // Выгрузка в папку build
+		.pipe(reload({stream: true})); // Перезагрузка сервера
+});
+
+// Таск c,jhrf JS
+gulp.task('js:build', function () {
+	gulp.src(path.src.js) //Находим исходник
+		.pipe(rigger()) // Прогон через rigger
+		.pipe(sourcemaps.init()) //Инициализация sourcemaps
+		.pipe(uglify()) // Сжатие js
+		.pipe(sourcemaps.write()) //Запись карты файла
+		.pipe(gulp.dest(path.build.js)) //Выгрузка в build
+		.pipe(reload({stream: true})); // Перезагрузка сервера
+});
+
+
+
+
+
+
 
 
 
