@@ -93,6 +93,20 @@ gulp.task('image:build', function() {
 		.pipe(reload({stream: true}));
 });
 
+//Таск для шрифтов
+gulp.task('fonts:build', function() {
+	gulp.src(path.src.fonts)
+		.pipe(gulp.dest(path.build.fonts))
+});
+
+// Общая сборка
+gulp.task('build', [
+	'html:build',
+	'js:build',
+	'style:build',
+	'fonts:build',
+	'image:build'
+]);
 
 
 
