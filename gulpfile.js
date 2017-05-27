@@ -57,7 +57,7 @@ gulp.task('html:build', function () { // Таск для сборки HTML
 		.pipe(reload({stream: true})); // Перезагрузка сервера
 });
 
-// Таск c,jhrf JS
+// Таск сборки JS
 gulp.task('js:build', function () {
 	gulp.src(path.src.js) //Находим исходник
 		.pipe(rigger()) // Прогон через rigger
@@ -68,6 +68,30 @@ gulp.task('js:build', function () {
 		.pipe(reload({stream: true})); // Перезагрузка сервера
 });
 
+//Таск сборки css
+gulp.task('style:build', function () {
+	gulp.src(path.src.style)
+		.pipe(sourcemaps.init())
+		.pipe(sass())
+		.pipe(prefixer())
+		.pipe(cleancss())
+		.pipe(sourcemaps.write())
+		.pipe(gulp.dest(path.build.css))
+		.pipe(reload({stream: true}));
+});
+
+// Таск сборки картинок
+gulp.task('image:build', function() {
+	gulp.src(path.src.img)
+		.pipe(imagemin({
+			progressive: true,
+			svgoPlugins: [{removeViewBox: false}],
+			use: [pngquant()],
+			interlaced: true
+		}))
+		.pipe(gulp.dest(path.build.img))
+		.pipe(reload({stream: true}));
+});
 
 
 
